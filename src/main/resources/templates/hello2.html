@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>두번째 헬로 페이지</title>
+</head>
+<body>
+    <h1>두번째 헬로 페이지</h1>
+    <ul>
+        <li>이름: <span th:text="${name}"></span></li>
+        <li>학번: <span th:text="${studentId}"></span></li>
+        <li>과목: <span th:text="${subject}"></span></li>
+        <li>주차: <span th:text="${week}"></span></li>
+        <li>메시지: <span th:text="${message}"></span></li>
+    </ul>
+    <a href="/hello">헬로 페이지</a>
+    <a href="/">홈페이지 메인</a>
+</body>
+</html>
