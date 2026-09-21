@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="보안 기술 스택 상세 소개 페이지">
+        <meta name="author" content="TemplateMo">
+        <title>보안 기술 스택 | First Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link href="/css/templatemo-first-portfolio-style.css" rel="stylesheet">
+        <style>
+            :root { --accent-dark: #0e7a5a; }
+            .navbar-solid { position: relative; background: var(--white-color); box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08); padding-bottom: 15px; }
+            .navbar-solid .navbar-brand, .navbar-solid .navbar-brand:hover { color: var(--dark-color); }
+            .navbar-solid .navbar-icon { background: var(--secondary-color); color: var(--white-color); }
+            .navbar-solid .custom-btn { background: transparent; border-color: var(--secondary-color); color: var(--accent-dark); }
+            .navbar-solid .custom-btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--white-color); }
+            .page-header { background: var(--section-bg-color); padding-top: 80px; padding-bottom: 80px; }
+            .page-header .breadcrumb-link { font-size: var(--menu-font-size); font-weight: var(--font-weight-bold); color: var(--accent-dark); text-transform: uppercase; }
+            .tech-thumb { background: var(--white-color); border: 2px solid var(--border-color); border-radius: var(--border-radius-medium); padding: 35px; height: 100%; transition: all 0.5s; }
+            .tech-thumb:hover { border-color: var(--secondary-color); transform: translateY(-8px); }
+            .tech-thumb-icon { font-size: 42px; color: var(--primary-color); line-height: normal; }
+            .tech-thumb h4 { font-size: var(--h5-font-size); margin-top: 15px; margin-bottom: 20px; }
+            .tech-tag { display: inline-block; background: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-large); color: var(--p-color); font-size: 16px; font-weight: var(--font-weight-medium); padding: 6px 16px; margin: 0 6px 10px 0; }
+            .tech-tag:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--white-color); }
+            .skill-label { font-size: var(--p-font-size); font-weight: var(--font-weight-medium); color: var(--dark-color); margin-bottom: 8px; }
+            .skill-bar { background: var(--border-color); border-radius: var(--border-radius-large); height: 10px; overflow: hidden; margin-bottom: 28px; }
+            .skill-bar span { display: block; height: 100%; background: var(--secondary-color); border-radius: var(--border-radius-large); }
+            .flow-item { border-left: 2px solid var(--border-color); padding-left: 30px; padding-bottom: 35px; position: relative; }
+            .flow-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+            .flow-item::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--secondary-color); }
+            .flow-step { font-size: 16px; font-weight: var(--font-weight-bold); color: var(--accent-dark); text-transform: uppercase; letter-spacing: 0.5px; }
+            @media screen and (max-width: 991px) { .page-header { padding-top: 120px; padding-bottom: 60px; } }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-solid">
+            <div class="container">
+                <a href="/" class="navbar-brand">First</a>
+                <div class="d-flex align-items-center ms-auto">
+                    <i class="navbar-icon bi-arrow-left-circle me-3"></i>
+                    <a class="custom-btn btn" href="/">메인으로 돌아가기</a>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <section class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-12">
+                            <p class="breadcrumb-link mb-2">Services / Security</p>
+                            <h1 class="mb-4">웹 보안</h1>
+                            <p class="mb-0">사용자의 정보를 안전하게 보호하고 서비스가 안정적으로 동작하도록 설계합니다. 인증, 권한 관리, HTTPS, 취약점 점검을 통해 신뢰할 수 있는 웹 서비스를 만드는 분야입니다.</p>
+                        </div>
+                        <div class="col-lg-3 col-12 ms-auto mt-5 mt-lg-0">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center">
+                                <h2 class="text-white mb-0">$3,600</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#535da1" fill-opacity="1" d="M0,160L24,160C48,160,96,160,144,138.7C192,117,240,75,288,64C336,53,384,75,432,106.7C480,139,528,181,576,208C624,235,672,245,720,240C768,235,816,213,864,186.7C912,160,960,128,1008,133.3C1056,139,1104,181,1152,202.7C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,0L0,0Z"></path></svg>
+
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-6 py-2"><strong class="featured-numbers">6</strong><p class="featured-text">보안 항목</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2"><strong class="featured-numbers">3</strong><p class="featured-text">인증 단계</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2 mt-4 mt-lg-0"><strong class="featured-numbers">24h</strong><p class="featured-text">점검 관점</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2 mt-4 mt-lg-0"><strong class="featured-numbers">90%</strong><p class="featured-text">보호 목표</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-12 mx-auto"><div class="section-title-wrap d-flex justify-content-center align-items-center mb-5"><h2 class="text-white mb-0">기술 스택</h2></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-shield-lock"></i><h4>인증과 권한</h4><p class="mb-4">로그인 사용자와 권한을 구분해 필요한 기능만 접근할 수 있도록 설계합니다.</p><a href="#" class="tech-tag">Authentication</a><a href="#" class="tech-tag">Authorization</a><a href="#" class="tech-tag">Session</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-lock"></i><h4>안전한 통신</h4><p class="mb-4">HTTPS와 암호화 개념을 활용해 사용자의 데이터가 안전하게 오가도록 합니다.</p><a href="#" class="tech-tag">HTTPS</a><a href="#" class="tech-tag">SSL/TLS</a><a href="#" class="tech-tag">Hashing</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-bug"></i><h4>취약점 이해</h4><p class="mb-4">SQL Injection, XSS처럼 자주 발생하는 웹 취약점을 이해하고 예방합니다.</p><a href="#" class="tech-tag">SQL Injection</a><a href="#" class="tech-tag">XSS</a><a href="#" class="tech-tag">CSRF</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-file-earmark-lock"></i><h4>개인정보 보호</h4><p class="mb-4">필요한 정보만 수집하고 민감한 데이터가 노출되지 않도록 관리합니다.</p><a href="#" class="tech-tag">Privacy</a><a href="#" class="tech-tag">Validation</a><a href="#" class="tech-tag">Logging</a></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <h3 class="mb-5">숙련도</h3>
+                            <p class="skill-label mb-2">인증 / 권한 관리</p><div class="skill-bar"><span style="width: 75%;"></span></div>
+                            <p class="skill-label mb-2">HTTPS / 암호화 개념</p><div class="skill-bar"><span style="width: 70%;"></span></div>
+                            <p class="skill-label mb-2">웹 취약점 이해</p><div class="skill-bar"><span style="width: 65%;"></span></div>
+                            <p class="skill-label mb-2">입력값 검증</p><div class="skill-bar"><span style="width: 80%;"></span></div>
+                        </div>
+                        <div class="col-lg-5 col-12 ms-auto mt-5 mt-lg-0">
+                            <h3 class="mb-5">진행 방식</h3>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 01</p><h5 class="mb-2">보호 대상 확인</h5><p class="mb-0">사용자 정보와 중요한 기능을 먼저 파악합니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 02</p><h5 class="mb-2">접근 권한 설계</h5><p class="mb-0">역할에 따라 접근 가능한 기능을 구분합니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 03</p><h5 class="mb-2">취약점 점검</h5><p class="mb-0">입력값과 요청 흐름에서 위험 요소를 확인합니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 04</p><h5 class="mb-2">개선과 기록</h5><p class="mb-0">보안 설정을 보완하고 기록을 남겨 재발을 줄입니다.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services section-padding"><div class="container"><div class="row"><div class="col-lg-8 col-12 mx-auto text-center"><h3 class="mb-3">안전한 서비스를 목표로</h3><p class="mb-4">기능뿐 아니라 신뢰할 수 있는 서비스를 만드는 방법을 계속 공부하고 있습니다.</p><a href="/#section_5" class="custom-btn custom-border-btn btn">연락하기</a><a href="/" class="custom-btn btn ms-2">목록으로</a></div></div></div></section>
+        </main>
+    </body>
+</html>

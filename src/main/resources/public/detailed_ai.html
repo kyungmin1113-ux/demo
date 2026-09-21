@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="AI 기술 스택 상세 소개 페이지">
+        <meta name="author" content="TemplateMo">
+        <title>AI 기술 스택 | First Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link href="/css/templatemo-first-portfolio-style.css" rel="stylesheet">
+        <style>
+            :root { --accent-dark: #0e7a5a; }
+            .navbar-solid { position: relative; background: var(--white-color); box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08); padding-bottom: 15px; }
+            .navbar-solid .navbar-brand, .navbar-solid .navbar-brand:hover { color: var(--dark-color); }
+            .navbar-solid .navbar-icon { background: var(--secondary-color); color: var(--white-color); }
+            .navbar-solid .custom-btn { background: transparent; border-color: var(--secondary-color); color: var(--accent-dark); }
+            .navbar-solid .custom-btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--white-color); }
+            .page-header { background: var(--section-bg-color); padding-top: 80px; padding-bottom: 80px; }
+            .page-header .breadcrumb-link { font-size: var(--menu-font-size); font-weight: var(--font-weight-bold); color: var(--accent-dark); text-transform: uppercase; }
+            .tech-thumb { background: var(--white-color); border: 2px solid var(--border-color); border-radius: var(--border-radius-medium); padding: 35px; height: 100%; transition: all 0.5s; }
+            .tech-thumb:hover { border-color: var(--secondary-color); transform: translateY(-8px); }
+            .tech-thumb-icon { font-size: 42px; color: var(--primary-color); line-height: normal; }
+            .tech-thumb h4 { font-size: var(--h5-font-size); margin-top: 15px; margin-bottom: 20px; }
+            .tech-tag { display: inline-block; background: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-large); color: var(--p-color); font-size: 16px; font-weight: var(--font-weight-medium); padding: 6px 16px; margin: 0 6px 10px 0; }
+            .tech-tag:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--white-color); }
+            .skill-label { font-size: var(--p-font-size); font-weight: var(--font-weight-medium); color: var(--dark-color); margin-bottom: 8px; }
+            .skill-bar { background: var(--border-color); border-radius: var(--border-radius-large); height: 10px; overflow: hidden; margin-bottom: 28px; }
+            .skill-bar span { display: block; height: 100%; background: var(--secondary-color); border-radius: var(--border-radius-large); }
+            .flow-item { border-left: 2px solid var(--border-color); padding-left: 30px; padding-bottom: 35px; position: relative; }
+            .flow-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+            .flow-item::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--secondary-color); }
+            .flow-step { font-size: 16px; font-weight: var(--font-weight-bold); color: var(--accent-dark); text-transform: uppercase; letter-spacing: 0.5px; }
+            @media screen and (max-width: 991px) { .page-header { padding-top: 120px; padding-bottom: 60px; } }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-solid">
+            <div class="container">
+                <a href="/" class="navbar-brand">First</a>
+                <div class="d-flex align-items-center ms-auto">
+                    <i class="navbar-icon bi-arrow-left-circle me-3"></i>
+                    <a class="custom-btn btn" href="/">메인으로 돌아가기</a>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <section class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-12">
+                            <p class="breadcrumb-link mb-2">Services / AI</p>
+                            <h1 class="mb-4">AI 기능 기획</h1>
+                            <p class="mb-0">데이터를 분석하고 사용자에게 필요한 결과를 추천하는 기능을 기획합니다. 웹 서비스에 AI 기능을 연결해 반복 작업을 줄이고, 더 편리한 사용자 경험을 만드는 분야입니다.</p>
+                        </div>
+                        <div class="col-lg-3 col-12 ms-auto mt-5 mt-lg-0">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center">
+                                <h2 class="text-white mb-0">$1,200</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#535da1" fill-opacity="1" d="M0,160L24,160C48,160,96,160,144,138.7C192,117,240,75,288,64C336,53,384,75,432,106.7C480,139,528,181,576,208C624,235,672,245,720,240C768,235,816,213,864,186.7C912,160,960,128,1008,133.3C1056,139,1104,181,1152,202.7C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,0L0,0Z"></path></svg>
+
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-6 py-2"><strong class="featured-numbers">4</strong><p class="featured-text">AI 아이디어</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2"><strong class="featured-numbers">3</strong><p class="featured-text">분석 단계</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2 mt-4 mt-lg-0"><strong class="featured-numbers">5+</strong><p class="featured-text">활용 기술</p></div>
+                        <div class="col-lg-3 col-6 featured-border-start ps-5 py-2 mt-4 mt-lg-0"><strong class="featured-numbers">80%</strong><p class="featured-text">학습 목표</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-12 mx-auto"><div class="section-title-wrap d-flex justify-content-center align-items-center mb-5"><h2 class="text-white mb-0">기술 스택</h2></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-robot"></i><h4>AI 기본 개념</h4><p class="mb-4">머신러닝과 딥러닝의 차이를 이해하고 서비스에 필요한 기능을 아이디어로 정리합니다.</p><a href="#" class="tech-tag">Machine Learning</a><a href="#" class="tech-tag">Deep Learning</a><a href="#" class="tech-tag">Recommendation</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-bar-chart"></i><h4>데이터 분석</h4><p class="mb-4">데이터를 수집하고 정리해 사용자의 행동이나 선호도를 이해하는 기초를 다집니다.</p><a href="#" class="tech-tag">Python</a><a href="#" class="tech-tag">Pandas</a><a href="#" class="tech-tag">Visualization</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-chat-dots"></i><h4>서비스 적용</h4><p class="mb-4">챗봇, 추천, 자동 분류처럼 웹 서비스에서 사용할 수 있는 AI 기능을 설계합니다.</p><a href="#" class="tech-tag">Chatbot</a><a href="#" class="tech-tag">API</a><a href="#" class="tech-tag">Automation</a></div></div>
+                        <div class="col-lg-6 col-12 mb-4"><div class="tech-thumb"><i class="tech-thumb-icon bi-shield-check"></i><h4>윤리와 검증</h4><p class="mb-4">AI 결과가 편향되지 않도록 검토하고 사용자가 신뢰할 수 있는 결과를 제공합니다.</p><a href="#" class="tech-tag">Bias Check</a><a href="#" class="tech-tag">Evaluation</a><a href="#" class="tech-tag">Privacy</a></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <h3 class="mb-5">숙련도</h3>
+                            <p class="skill-label mb-2">AI 개념 이해</p><div class="skill-bar"><span style="width: 70%;"></span></div>
+                            <p class="skill-label mb-2">Python 데이터 분석</p><div class="skill-bar"><span style="width: 65%;"></span></div>
+                            <p class="skill-label mb-2">추천 기능 기획</p><div class="skill-bar"><span style="width: 75%;"></span></div>
+                            <p class="skill-label mb-2">웹 서비스 연동</p><div class="skill-bar"><span style="width: 60%;"></span></div>
+                        </div>
+                        <div class="col-lg-5 col-12 ms-auto mt-5 mt-lg-0">
+                            <h3 class="mb-5">진행 방식</h3>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 01</p><h5 class="mb-2">문제 정의</h5><p class="mb-0">AI가 해결할 수 있는 사용자의 불편함을 찾습니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 02</p><h5 class="mb-2">데이터 정리</h5><p class="mb-0">필요한 데이터를 수집하고 분석하기 쉬운 형태로 정리합니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 03</p><h5 class="mb-2">기능 구현</h5><p class="mb-0">추천, 분류, 자동화 기능을 작은 단위로 구현합니다.</p></div>
+                            <div class="flow-item"><p class="flow-step mb-1">Step 04</p><h5 class="mb-2">결과 검증</h5><p class="mb-0">결과가 정확하고 사용하기 편한지 확인합니다.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services section-padding"><div class="container"><div class="row"><div class="col-lg-8 col-12 mx-auto text-center"><h3 class="mb-3">AI 아이디어를 서비스로</h3><p class="mb-4">작은 아이디어부터 웹에 연결되는 기능까지 차근차근 구현해보고 싶습니다.</p><a href="/#section_5" class="custom-btn custom-border-btn btn">연락하기</a><a href="/" class="custom-btn btn ms-2">목록으로</a></div></div></div></section>
+        </main>
+    </body>
+</html>
