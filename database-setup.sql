@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS spring
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE spring;
+
+CREATE USER IF NOT EXISTS 'springuser'@'localhost' IDENTIFIED BY '123123';
+CREATE USER IF NOT EXISTS 'springuser'@'127.0.0.1' IDENTIFIED BY '123123';
+
+GRANT ALL PRIVILEGES ON spring.* TO 'springuser'@'localhost';
+GRANT ALL PRIVILEGES ON spring.* TO 'springuser'@'127.0.0.1';
+
+FLUSH PRIVILEGES;
+
+SHOW DATABASES;

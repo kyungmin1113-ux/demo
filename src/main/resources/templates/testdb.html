@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>데이터베이스 테스트</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f9f9f9;
+            color: #212529;
+            font-family: Arial, "Noto Sans KR", sans-serif;
+        }
+
+        .page-wrap {
+            max-width: 960px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .db-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.08);
+            padding: 36px;
+        }
+
+        .badge-db {
+            background: #14b789;
+            color: #ffffff;
+            border-radius: 999px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding: 8px 16px;
+        }
+
+        table {
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+<main class="page-wrap">
+    <section class="db-card">
+        <span class="badge-db">4주차 데이터베이스 연동</span>
+        <h1 class="mb-3">데이터베이스 테스트</h1>
+        <p class="text-muted mb-4">
+            Spring Data JPA와 MySQL을 연결하고, <code>testdb</code> 테이블의 데이터를 조회하는 화면입니다.
+        </p>
+
+        <div class="alert alert-success" th:if="${test != null}">
+            이름 검색 결과: <strong th:text="${test.name}">홍길동</strong>
+        </div>
+
+        <p>전체 데이터 수: <strong th:text="${count}">0</strong>개</p>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>주소</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">1</td>
+                    <td th:text="${user.name}">홍길동</td>
+                    <td th:text="${user.email}">hong@example.com</td>
+                    <td th:text="${user.address}">서울시</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(users)}">
+                    <td colspan="4" class="text-center text-muted">조회된 데이터가 없습니다.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/" class="btn btn-success mt-3">메인으로 돌아가기</a>
+    </section>
+</main>
+</body>
+</html>
