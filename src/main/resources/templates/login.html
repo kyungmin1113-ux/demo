@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>로그인</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+    <style>
+        body {
+            background: #f9f9f9;
+            color: #212529;
+            font-family: Arial, "Noto Sans KR", sans-serif;
+        }
+
+        .auth-wrap {
+            max-width: 440px;
+            margin: 72px auto;
+            padding: 0 20px;
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.08);
+            padding: 36px;
+        }
+
+        .auth-badge {
+            background: #14b789;
+            color: #ffffff;
+            border-radius: 999px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding: 8px 16px;
+        }
+
+        .btn-auth {
+            background: #535da1;
+            border: 0;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn-auth:hover {
+            background: #14b789;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<main class="auth-wrap">
+    <section class="auth-card">
+        <span class="auth-badge">5주차 로그인</span>
+        <h1 class="h3 mb-3">로그인</h1>
+
+        <div class="alert alert-success" th:if="${param.signup}">
+            회원가입이 완료되었습니다. 로그인해주세요.
+        </div>
+        <div class="alert alert-success" th:if="${param.logout}">
+            로그아웃 되었습니다.
+        </div>
+        <div class="alert alert-danger" th:if="${param.error}">
+            아이디 또는 비밀번호가 올바르지 않습니다.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">아이디</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="아이디" required autofocus>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">비밀번호</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required>
+            </div>
+
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me">
+                <label class="form-check-label" for="remember-me">로그인 상태 유지</label>
+            </div>
+
+            <button type="submit" class="btn btn-auth w-100">
+                <i class="bi-box-arrow-in-right me-1"></i>로그인
+            </button>
+        </form>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a th:href="@{/}" class="text-decoration-none">메인으로</a>
+            <a th:href="@{/signup}" class="text-decoration-none">회원가입</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
