@@ -1,341 +1,84 @@
-# Spring Boot 주차별 실습 정리
+# 자바웹프로그래밍 실습 | 2~7주차
 
-성결대학교 미디어소프트웨어학과 23학번 기경민의 Spring Boot 실습 프로젝트입니다.  
-2주차는 Spring Boot 기본 실행과 URL 매핑, 3주차는 포트폴리오 프론트 화면 제작, 4주차는 MySQL 데이터베이스 연동, 5주차는 로그인/로그아웃과 비밀번호 암호화를 중심으로 진행했습니다.
+**성결대학교 미디어소프트웨어학과 · 20230968 기경민**
 
-## 개발 환경
+Spring Boot로 개인 포트폴리오부터 데이터베이스, 회원 인증·권한 관리, REST API까지 구현한 실습 프로젝트입니다. 수업 내용과 연습문제를 이 README 한 페이지에 통합했습니다.
 
-| 구분 | 내용 |
-| --- | --- |
-| 언어 | Java 26 |
-| 프레임워크 | Spring Boot 4.1.1 |
-| 빌드 도구 | Maven |
-| 템플릿 엔진 | Thymeleaf |
-| 데이터베이스 | MySQL, H2 |
-| 주요 라이브러리 | Spring Web, Spring Data JPA, Spring Security, Thymeleaf Security, Bootstrap 5, Bootstrap Icons |
+## 개발 환경 및 실행
 
-## 실행 방법
+Java 26 · Spring Boot 4.1.1 · Maven · Thymeleaf · Bootstrap 5 · Spring Data JPA · Spring Security · MySQL (`spring`) · H2(테스트)
+
+MySQL을 실행하고 아래 SQL로 DB를 준비한 뒤, `src/main/resources/application-secret.properties`에 로컬 DB 계정 정보를 설정합니다. 해당 파일은 Git 추적에서 제외합니다.
+
+```sql
+CREATE DATABASE IF NOT EXISTS spring CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
 ```bash
 ./mvnw spring-boot:run
+# 브라우저: http://localhost:8080/
 ```
 
-실행 후 브라우저에서 `http://localhost:8080/`으로 접속합니다.
+관리자는 `/signup`에서 `admin`으로 회원가입한 뒤 [관리자 권한 SQL](관리자_권한_부여.sql)을 실행하고 다시 로그인합니다. 비밀번호는 회원가입 시 BCrypt로 해시하여 저장합니다.
 
-| 페이지 | 주소 |
-| --- | --- |
-| 메인 포트폴리오 | `http://localhost:8080/` |
-| 2주차 기본 페이지 | `http://localhost:8080/hello` |
-| 2주차 연습 페이지 | `http://localhost:8080/hello2` |
-| 4주차 DB 연동 페이지 | `http://localhost:8080/testdb` |
-| 5주차 로그인 | `http://localhost:8080/login` |
-| 5주차 회원가입 | `http://localhost:8080/signup` |
-| 웹 개발 상세 | `http://localhost:8080/detailed_web.html` |
-| AI 상세 | `http://localhost:8080/detailed_ai.html` |
-| 보안 상세 | `http://localhost:8080/detailed_security.html` |
-| 게임 개발 상세 | `http://localhost:8080/detailed_game.html` |
+## 주차별 실습 및 연습문제
 
-## 2주차: 개발 환경 설정 및 테스트
+| 주차 | 학습 주제 | 구현 내용 및 연습문제 |
+| --- | --- | --- |
+| 2주차 | 개발 환경·기본 테스트 | Spring Boot 실행, Controller와 URL 매핑, `/hello`·`/hello2`에서 Thymeleaf로 인사와 학생 정보 출력 |
+| 3주차 | 포트폴리오 프론트 | 프로필 사진과 크기 조정, 자기소개·일대기, 연락 영역 개인화, 웹·AI·보안·게임 상세 페이지와 가격 표시 |
+| 4주차 | 데이터베이스 연동 | MySQL `spring` DB 연결, `TestDB` 엔티티·Repository·Service 구성, `/testdb`에서 DB 목록 조회 |
+| 5주차 | 로그인·로그아웃·암호화 | 회원가입과 입력 검증, BCrypt, 세션 로그인·로그아웃, remember-me, 로그인 상태별 메뉴 표시 |
+| 6주차 | 권한·관리자 페이지 | USER·MANAGER·ADMIN 분리, 내 정보·관리자 회원 목록, 권한 변경·삭제, 403 화면. **연습:** 본인 권한 변경·삭제 차단, MANAGER의 `/testdb` 접근 허용 |
+| 7주차 | REST API·JSON | 응답 DTO, Basic/세션 인증, 회원 조회·등록·권한 변경·삭제, 제공 코드의 fetch 화면 연결. **연습①:** 아이디·이름 검색. **연습②:** `@RestControllerAdvice`로 오류 처리 통합 |
 
-### 실습 목표
+## 주요 화면 및 접근 권한
 
-- Spring Boot 프로젝트 생성 및 실행
-- Controller와 URL 매핑 이해
-- Thymeleaf 템플릿에 Model 데이터 출력
-- `/hello`, `/hello2` 페이지 작성
+| 구분 | 주소 | 접근 권한 |
+| --- | --- | --- |
+| 포트폴리오·기본 실습 | `/`, `/hello`, `/hello2` | 공개 |
+| 기술별 상세 페이지 | `/detailed_web.html`, `/detailed_ai.html`, `/detailed_security.html`, `/detailed_game.html` | 공개 |
+| 회원가입·로그인 | `/signup`, `/login` | 공개 |
+| 내 정보 | `/mypage` | 로그인 회원 |
+| DB 조회 | `/testdb` | ADMIN·MANAGER |
+| 관리자 회원 관리 | `/admin/members`, `/admin/members-api` | ADMIN |
 
-### 구현 내용
+기존 회원 관리 화면의 **API 버전으로 보기**를 누르면 새로고침 없이 JSON으로 회원을 관리하고 HTTP 요청·응답 기록을 확인할 수 있습니다.
 
-| 파일 | 설명 |
-| --- | --- |
-| `src/main/java/com/example/demo/DemoController.java` | `/hello`, `/hello2` URL 매핑 작성 |
-| `src/main/resources/templates/hello.html` | 기본 메시지 출력 페이지 |
-| `src/main/resources/templates/hello2.html` | 이름, 학번, 과목, 주차, 메시지 출력 페이지 |
+## 7주차 REST API
 
-### 주요 코드
+| 메서드 | 주소 | 결과 |
+| --- | --- | --- |
+| GET | `/api/hello` | 공개, 인사·시간 JSON (200) |
+| GET | `/api/me` | 로그인 회원의 내 정보 (200) |
+| GET | `/api/admin/members?keyword=student` | ADMIN, 전체 목록 또는 검색 결과 (200) |
+| GET | `/api/admin/members/{id}` | ADMIN, 회원 1명 (200), 없으면 404 |
+| POST | `/api/admin/members` | ADMIN, 회원 등록 (201 + Location 헤더) |
+| PATCH | `/api/admin/members/{id}/role` | ADMIN, 권한 변경 (200) |
+| DELETE | `/api/admin/members/{id}` | ADMIN, 회원 삭제 (204, 본문 없음) |
 
-```java
-@GetMapping("/hello2")
-public String hello2(Model model) {
-    model.addAttribute("name", "기경민");
-    model.addAttribute("studentId", "20230968");
-    model.addAttribute("subject", "윈도우 프로그래밍");
-    model.addAttribute("week", "2주차");
-    model.addAttribute("message", "스프링 부트 URL 매핑과 컨트롤러 연습문제 완료");
-    return "hello2";
-}
+등록 JSON은 `username`, `password`, `passwordConfirm`, `name`을 사용합니다. 신규 회원은 요청에 `role`을 넣어도 USER로 저장하며, 권한 변경은 `{"role":"MANAGER"}` 형식입니다. 응답 DTO에는 `id`, `username`, `name`, `role`만 포함하고 비밀번호·해시는 제외합니다.
+
+**연습① 검색:** 아이디 또는 이름에 검색어가 포함된 회원을 반환합니다. 앞뒤 공백과 영문 대소문자를 처리하며, 빈 검색어는 전체 목록, 검색 결과가 없으면 `[]`를 반환합니다.
+
+**연습② 공통 오류:** 중복 아이디, 필수 값 누락, 비밀번호 불일치, 허용되지 않는 권한, 본인 변경·삭제, 잘못된 JSON·회원 번호를 `400`과 `{"error":"메시지"}`로 처리합니다. 미인증 API는 401, 관리자 권한 부족은 403이며 서버 오류 응답의 스택 추적 노출을 막았습니다.
+
+Postman은 **Authorization → Basic Auth**에 실제 가입한 계정을 입력하고, 등록·수정 요청은 **Body → raw → JSON**으로 전송합니다. 브라우저는 기존 로그인 세션을 사용합니다. 실습 조건에 따라 `/api/**`는 CSRF 검사에서 제외하고 HTML 폼은 검사를 유지합니다. Basic 인증을 외부 서비스에서 사용할 때는 HTTPS가 필요합니다.
+
+## 검증 및 문제 해결
+
+```bash
+./mvnw test
+curl http://localhost:8080/api/hello
+curl -u admin 'http://localhost:8080/api/admin/members?keyword=student'
 ```
 
-### 실행 화면
+`curl -u admin`은 비밀번호를 별도로 입력받습니다. 앞선 구현 검증에서 자동 테스트 **7개가 통과**했습니다. H2 기반 인증·권한, 세션/Basic 인증, 검색, BCrypt, 비밀번호 비노출, 권한 조작 방지, 등록·변경·삭제, 본인 보호, 공통 오류와 템플릿 렌더링을 검증했습니다. MySQL 연결 및 실제 서버의 `/api/hello` 200, 미인증 `/api/me` 401 응답도 확인했습니다.
 
-![hello 페이지](docs/images/hello-page.png)
+학습 중에는 프로필 이미지 경로·크기, 회원가입 HTML 따옴표 누락, DB 연결 설정을 수정했습니다. API 인증 실패 시 로그인 HTML 대신 401을 반환하도록 분리했고, 엔티티를 직접 응답할 때 발생하는 비밀번호 노출은 응답 DTO로 해결했습니다. 화면과 API가 같은 서비스를 사용하므로 권한 검사와 본인 계정 보호 규칙도 함께 적용됩니다.
 
-![hello2 페이지](docs/images/hello2-page.png)
+## 실행 화면
 
-## 3주차: 포트폴리오 프론트 작성
+기존 포트폴리오 메인 화면 캡처입니다.
 
-### 실습 목표
-
-- TemplateMo First Portfolio 템플릿을 활용한 개인 포트폴리오 제작
-- 자기소개, 일대기, 기술, 프로젝트, 연락 영역 수정
-- 관심 분야별 상세 페이지 작성
-- 이미지 크기와 레이아웃 조정
-
-### 구현 내용
-
-| 파일 | 설명 |
-| --- | --- |
-| `src/main/resources/templates/index.html` | 메인 포트폴리오 페이지 |
-| `src/main/resources/static/images/profile.jpg` | 프로필 이미지 |
-| `src/main/resources/static/css/templatemo-first-portfolio-style.css` | 포트폴리오 디자인 수정 |
-| `src/main/resources/public/detailed_web.html` | 웹 개발 상세 페이지 |
-| `src/main/resources/public/detailed_ai.html` | AI 상세 페이지 |
-| `src/main/resources/public/detailed_security.html` | 보안 상세 페이지 |
-| `src/main/resources/public/detailed_game.html` | 게임 개발 상세 페이지 |
-
-### 메인 페이지 수정 사항
-
-- 상단 소개 문구를 `성결대학교 미소과 23학번 기경민입니다.`로 수정
-- `profile.jpg`를 적용해 본인 프로필 이미지 표시
-- `갱's 일대기` 영역을 개인 소개 내용으로 작성
-- 소개 영역 이미지 크기와 비율 조정
-- 기술 영역을 `웹 개발`, `AI`, `보안`, `게임 개발`로 구성
-- 각 기술 카드에 Bootstrap Icons 적용
-- 각 기술 카드에서 상세 페이지로 이동하도록 링크 연결
-
-### 상세 페이지 구성
-
-| 분야 | 파일 | 가격 | 주요 내용 |
-| --- | --- | --- | --- |
-| 웹 개발 | `detailed_web.html` | `$2,400` | HTML, CSS, JavaScript, Spring Boot, REST API |
-| AI | `detailed_ai.html` | `$1,200` | 데이터 분석, 모델 학습, AI 서비스 적용 |
-| 보안 | `detailed_security.html` | `$3,600` | 인증, 권한, HTTPS, 웹 취약점 점검 |
-| 게임 개발 | `detailed_game.html` | `$1,450` | 게임 기획, 로직 구현, 사용자 경험 |
-
-### 실행 화면
-
-![메인 포트폴리오](docs/images/index-page.png)
-
-![웹 개발 상세 페이지](docs/images/detailed-web-page.png)
-
-![AI 상세 페이지](docs/images/detailed-ai-page.png)
-
-![보안 상세 페이지](docs/images/detailed-security-page.png)
-
-![게임 개발 상세 페이지](docs/images/detailed-game-page.png)
-
-## 4주차: 데이터베이스 연동 및 테스트
-
-### 실습 목표
-
-- MySQL 데이터베이스 생성
-- Spring Boot와 MySQL 연결
-- JPA Entity, Repository, Service 구조 작성
-- DB 데이터를 Thymeleaf 화면에 출력
-
-### MySQL 설정
-
-```sql
-CREATE DATABASE IF NOT EXISTS spring
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-
-USE spring;
-
-CREATE USER IF NOT EXISTS '본인계정'@'localhost' IDENTIFIED BY '본인비밀번호';
-CREATE USER IF NOT EXISTS '본인계정'@'127.0.0.1' IDENTIFIED BY '본인비밀번호';
-
-GRANT ALL PRIVILEGES ON spring.* TO '본인계정'@'localhost';
-GRANT ALL PRIVILEGES ON spring.* TO '본인계정'@'127.0.0.1';
-
-FLUSH PRIVILEGES;
-```
-
-같은 SQL은 `database-setup.sql`에 정리했습니다.
-
-### Spring DB 설정
-
-`src/main/resources/application.properties`
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-```
-
-### 구현 내용
-
-| 파일 | 설명 |
-| --- | --- |
-| `src/main/java/com/example/demo/model/domain/TestDB.java` | `testdb` 테이블과 매핑되는 Entity |
-| `src/main/java/com/example/demo/model/repository/TestRepository.java` | DB 조회를 담당하는 Repository |
-| `src/main/java/com/example/demo/model/service/TestService.java` | 전체 조회, 이름 조회, 샘플 데이터 저장 처리 |
-| `src/main/java/com/example/demo/DemoController.java` | `/testdb` URL 매핑 추가 |
-| `src/main/resources/templates/testdb.html` | DB 데이터 목록 출력 화면 |
-| `src/test/resources/application-test.properties` | 테스트용 H2 DB 설정 |
-
-### 주요 코드
-
-```java
-@GetMapping("/testdb")
-public String testdb(Model model) {
-    testService.saveSampleDataIfEmpty();
-
-    TestDB test = testService.findByName("홍길동");
-    List<TestDB> users = testService.findAll();
-
-    model.addAttribute("test", test);
-    model.addAttribute("users", users);
-    model.addAttribute("count", users.size());
-    return "testdb";
-}
-```
-
-### 확인 결과
-
-- MySQL에 `spring` 데이터베이스 생성 완료
-- `testdb` 테이블 생성 완료
-- 샘플 데이터 3개 저장 확인
-- `/testdb` 페이지에서 DB 데이터 출력 확인
-- `./mvnw test` 테스트 통과
-
-## 5주차: 로그인, 로그아웃 및 암호화
-
-### 실습 목표
-
-- Spring Security 의존성 추가
-- 로그인/로그아웃 기능 구현
-- 회원가입 기능 구현
-- BCrypt를 이용한 비밀번호 단방향 암호화
-- 로그인 상태에 따라 네비게이션 버튼 변경
-- 로그인하지 않은 사용자의 회원목록 페이지 접근 제한
-- 로그인 상태 유지와 비밀번호 확인 검증 구현
-
-### 구현 내용
-
-| 파일 | 설명 |
-| --- | --- |
-| `src/main/java/com/example/demo/config/SecurityConfig.java` | 보안 설정, 로그인/로그아웃, remember-me 설정 |
-| `src/main/java/com/example/demo/controller/MemberController.java` | 로그인 화면, 회원가입 화면, 회원가입 처리 |
-| `src/main/java/com/example/demo/model/domain/Member.java` | `member` 테이블과 매핑되는 회원 Entity |
-| `src/main/java/com/example/demo/model/dto/MemberForm.java` | 회원가입 화면에서 전달되는 DTO |
-| `src/main/java/com/example/demo/model/repository/MemberRepository.java` | 회원 조회와 아이디 중복 확인 |
-| `src/main/java/com/example/demo/model/service/MemberService.java` | 회원가입, BCrypt 암호화, 로그인 회원 조회 |
-| `src/main/resources/templates/login.html` | 로그인 화면 |
-| `src/main/resources/templates/signup.html` | 회원가입 화면 |
-| `src/main/resources/templates/index.html` | 로그인 상태별 네비게이션 버튼 출력 |
-
-### 보안 설정 요약
-
-```java
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
-
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/", "/hello", "/hello2", "/login", "/signup", "/error").permitAll()
-            .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form
-            .loginPage("/login")
-            .defaultSuccessUrl("/")
-            .failureUrl("/login?error")
-            .permitAll()
-        )
-        .logout(logout -> logout
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout")
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID", "remember-me")
-        )
-        .rememberMe(remember -> remember
-            .key("gyeongmin-week5-remember-me")
-            .tokenValiditySeconds(60 * 60 * 24 * 7)
-        );
-
-    return http.build();
-}
-```
-
-### 회원가입 암호화
-
-```java
-member.setPassword(passwordEncoder.encode(form.getPassword()));
-member.setRole("USER");
-```
-
-비밀번호는 DB에 평문으로 저장하지 않고 BCrypt 해시 값으로 저장합니다.  
-또한 회원가입 시 `password`와 `passwordConfirm`을 비교하여 다르면 `비밀번호가 일치하지 않습니다.` 메시지를 출력합니다.
-
-### 로그인 처리
-
-```java
-@Override
-public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Member member = memberRepository.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("회원 없음 : " + username));
-
-    return User.builder()
-        .username(member.getUsername())
-        .password(member.getPassword())
-        .roles(member.getRole())
-        .build();
-}
-```
-
-Spring Security가 `loadUserByUsername()`으로 DB 회원을 조회하고, 입력한 비밀번호와 DB의 BCrypt 해시 값을 자동으로 비교합니다.
-
-### DB 보안 설정 분리
-
-`application.properties`에는 비밀 정보를 직접 적지 않고 아래처럼 분리했습니다.
-
-```properties
-spring.config.import=optional:application-secret.properties
-```
-
-`application-secret.properties`에는 DB 계정 정보가 들어가며, `.gitignore`에 추가하여 업로드되지 않도록 설정했습니다.
-
-### 확인 결과
-
-- `member` 테이블 자동 생성 확인
-- 회원가입 성공 시 `/login?signup`으로 이동 확인
-- 비밀번호 확인 불일치 시 오류 메시지 출력 확인
-- 로그인 전 `/testdb` 접근 시 `/login`으로 이동 확인
-- 로그인 후 메인 네비게이션에 `아이디님`과 로그아웃 버튼 출력 확인
-- 로그인 후 `/testdb` 접근 가능 확인
-- `./mvnw test` 테스트 통과
-
-## 프로젝트 구조
-
-```text
-demo
-├── database-setup.sql
-├── pom.xml
-├── readme.md
-├── docs/images
-├── src/main/java/com/example/demo
-│   ├── DemoApplication.java
-│   ├── DemoController.java
-│   ├── config
-│   ├── controller
-│   └── model
-├── src/main/resources
-│   ├── application.properties
-│   ├── public
-│   ├── static
-│   └── templates
-└── src/test
-```
-
-## 최종 정리
-
-이번 실습에서는 Spring Boot의 기본 구조부터 프론트 화면 구성, MySQL 데이터베이스 연동까지 단계적으로 구현했습니다.  
-2주차에서는 Controller와 Thymeleaf 출력 흐름을 익혔고, 3주차에서는 개인 포트폴리오 페이지를 완성했으며, 4주차에서는 Spring Data JPA를 이용해 실제 DB 데이터를 화면에 출력했습니다. 5주차에서는 Spring Security를 적용하여 로그인, 로그아웃, 회원가입, 비밀번호 암호화까지 구현했습니다.
+![기경민 포트폴리오 메인 화면](docs/images/index-page.png)

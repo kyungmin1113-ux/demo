@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
+
+import com.example.demo.model.domain.Member;
 import com.example.demo.model.dto.MemberForm;
 import com.example.demo.model.service.MemberService;
 import org.springframework.stereotype.Controller;
@@ -40,5 +43,12 @@ public class MemberController {
         }
 
         return "redirect:/login?signup";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(Principal principal, Model model) {
+        Member member = memberService.findByUsername(principal.getName());
+        model.addAttribute("member", member);
+        return "mypage";
     }
 }
