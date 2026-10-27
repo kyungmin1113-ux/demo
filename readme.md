@@ -120,19 +120,19 @@ curl -u admin 'http://localhost:8080/api/admin/members?keyword=student'
 <a id="run"></a>
 ## 실행 및 검증
 
-MySQL을 실행하고 `spring` DB를 준비한 뒤 `src/main/resources/application-secret.properties`에 로컬 DB 계정을 설정합니다. 계정 파일은 Git 추적에서 제외합니다.
+프로젝트는 VS Code에서 실행했습니다. 먼저 MySQL이 실행 중인지 확인하고, 수업 자료에 맞춰 `spring` 데이터베이스를 사용하도록 설정했습니다. DB 접속 정보는 `src/main/resources/application-secret.properties`에 따로 작성하고 Git에 올라가지 않도록 제외했습니다.
 
 ```sql
 CREATE DATABASE IF NOT EXISTS spring CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
+VS Code 터미널에서 아래 명령으로 서버를 실행한 뒤, 브라우저에서 `http://localhost:8080/`에 접속해 화면을 확인했습니다.
+
 ```bash
 ./mvnw spring-boot:run
-# 접속: http://localhost:8080/
-./mvnw test
 ```
 
-관리자는 `/signup`에서 `admin` 계정을 만든 뒤 [관리자 권한 SQL](관리자_권한_부여.sql)을 실행하고 다시 로그인합니다.
+관리자 기능은 기존 `admin` 계정으로 로그인해서 확인했습니다. 관리자 계정을 처음 설정할 때는 회원가입 후 [관리자 권한 SQL](관리자_권한_부여.sql)을 실행하고, 로그아웃했다가 다시 로그인해야 변경된 권한이 적용됩니다.
 
 | 기능 | 주소 | 접근 권한 |
 | --- | --- | --- |
@@ -142,6 +142,20 @@ CREATE DATABASE IF NOT EXISTS spring CHARACTER SET utf8mb4 COLLATE utf8mb4_unico
 | DB 조회 | `/testdb` | ADMIN·MANAGER |
 | 관리자 화면 | `/admin/members`, `/admin/members-api` | ADMIN |
 
-**검증 기록:** 7주차 구현 시 H2·MockMvc 자동 테스트 7개가 통과했습니다. 이번 재촬영에서는 기존 `admin` 로그인, 실제 MySQL 데이터 목록, 본인 권한 변경 차단, 기경민 회원 검색 200·필수 값 누락 400을 확인했습니다. 계정 추가나 기존 비밀번호·권한 변경 없이 캡처했습니다.
+**실행하면서 확인한 내용**
 
-**문제 해결:** 프로필 경로·사진 크기, 회원가입 HTML 따옴표 누락, DB 연결 설정을 수정했습니다. API는 로그인 HTML 대신 401을 반환하도록 분리했고 응답 DTO로 비밀번호 노출을 방지했습니다. 화면과 API가 같은 서비스를 사용하여 권한·본인 보호 규칙도 함께 적용됩니다.
+로그인한 뒤 DB 조회 화면에서 데이터가 나오는지 확인했습니다. 관리자 화면에서는 실제 회원 목록과 권한을 확인하고, `admin` 자신의 권한을 변경하려고 했을 때 오류 메시지가 나오면서 기존 권한이 유지되는 것도 확인했습니다.
+
+7주차 API 화면에서는 이름에 ‘기경민’을 입력해 제 계정인 `rlrudals13`이 검색되는지 확인했습니다. 검색 요청은 200으로 응답했고, 회원 등록 내용을 비워서 보내면 400과 함께 입력 오류 메시지가 나왔습니다. 화면 오른쪽의 요청·응답 기록을 보면서 결과를 확인할 수 있었습니다.
+
+자동 테스트는 아래 명령으로 실행했으며, H2·MockMvc를 사용하는 테스트 7개가 통과했습니다.
+
+```bash
+./mvnw test
+```
+
+**실습 중 수정한 부분**
+
+프로필 사진이 적용되지 않거나 크기가 맞지 않는 문제는 이미지 경로와 크기 설정을 수정했습니다. 회원가입 화면 오류는 HTML 속성의 따옴표 누락을 수정했고, DB 연결은 기존 설정을 확인해 수업에서 사용하는 `spring` DB에 맞췄습니다.
+
+API에서는 로그인하지 않았을 때 로그인 화면 HTML 대신 401을 반환하도록 설정했습니다. 회원 엔티티를 그대로 반환하면 비밀번호 해시까지 나갈 수 있어서 응답 DTO에는 필요한 정보만 담았습니다. 이번 실습을 통해 화면이 정상적으로 보이는지뿐 아니라 권한과 응답 데이터, 상태 코드도 함께 확인해야 한다는 점을 정리할 수 있었습니다.
